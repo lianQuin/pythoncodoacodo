@@ -269,6 +269,7 @@ while True:
     def salirAplicacion():    
         valor=messagebox.askquestion("salir","¿Esta seguro que desea salir")
         if valor=="yes":
+            print("Hola por favor recorda anotar tu contraseña para no olvidarte")
             root.destroy()
             menu_Cliente()
             
@@ -427,46 +428,9 @@ while True:
     #esta siempre esperando, sirve para ver la tabla cuando se indique
     root.mainloop()
     
-    '''from tkinter import *
-    from tkinter. ttk import *
-  
-    root=Tk()
-    root.title ("formulario")
-    
-    root.geometry("550x450+300+300")
-    root.config(bg="pink")
-    
-    Lbel1=Label(root,text="Nombre")
-    Lbel1.place(x=10,y=10,width=100,height=30)
-    Txt1=Entry(root)
-    Txt1.place(x=10,y=120,width=100,height=30)
-    
-    contraseña=Label(root,text="ingrese una contraseña para nuestro sistema:")
-    contraseña.pack()
-    
-    contra=StringVar()
-    contra1=Entry(root,width=60,textvariable=contra,show="*")
-    contra1.pack()
-    def ingresar():
-        root.title("bienvenido")
-    menu_Cliente()
+   
 
     
-    bt=Button(root,text="Ingresar",command=ingresar)
-    bt.pack(side=BOTTOM)
-    root.mainloop()     
-     
-    print("Crear Usuario")
-        
-    logins=[]
-    usuario=input("Ingrese nombre de usuario: ")
-    contrasena=input("Ingrese contraseña: ")
-
-    logins={
-    "usuario":usuario,
-    "contraseña":contrasena,}
-   '''
-    print("Hola", usuario, "tu contraseña sera", contraseña, "por favor recorda anotar los datos para no olvidarte") 
     gestion.decorar(3)   
 
   elif opcion==2:
@@ -495,7 +459,7 @@ while True:
     contra1=Entry(root,width=30,textvariable=contra,show="*")
     contra1.pack()
     def ingresar():
-      if usuario1.get()=="Juan" and contra.get()=="1234":
+      if usuario1.get()=="juan" and contra.get()=="1234":
         root.title("bienvenido")
         print("Hola juan bienvenid@ al menú de la empresa")
         menu_Usuario()
