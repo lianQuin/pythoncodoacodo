@@ -13,7 +13,7 @@ root.geometry("600x350")
 productosCodigo=StringVar()
 productosNombre=StringVar()
 productosCategoria=StringVar()
-productosCantidad=StringVar()
+productosCantidad=StringVar()  
 productosNacionalidad=StringVar()
 
 #la conexion con la base de datos sirve para crear y conectar con la base
@@ -145,7 +145,36 @@ def borrar():
         pass
     #cambie a IF
     limpiarCampos()
-    mostrar()          
+    mostrar()   
+  
+                   
+def mostrarStockLim():
+    laConexion=sqlite3.connect("productos")
+    elCursor=laConexion.cursor()
+    registros=tree.get_children()
+    for elemento in registros:
+        tree.delete(elemento)
+    try:
+        elCursor.execute("SELECT * FROM productos WHERE Cantidad <=20")
+        for row in elCursor:
+            tree.insert("",0,text=row[0],values=(row[1],row[2],row[3],row[4]))
+    except:
+        pass
+def mostrarStockAlto():
+    laConexion=sqlite3.connect("productos")
+    elCursor=laConexion.cursor()
+    registros=tree.get_children()
+    for elemento in registros:
+        tree.delete(elemento)
+    try:
+        elCursor.execute("SELECT * FROM productos WHERE Cantidad >=100")
+        for row in elCursor:
+            tree.insert("",0,text=row[0],values=(row[1],row[2],row[3],row[4]))
+    except:
+        pass
+
+    
+         
          
     
 #colocar widget
@@ -198,6 +227,11 @@ b3=Button(root,text="mostrar lista",command=mostrar)
 b3.place(x=320,y=90)
 b4=Button(root,text="eliminar registro", bg="red",command=borrar)
 b4.place(x=450,y=90)
+b5=Button(root,text="STOCK LIMITADO",command= mostrarStockLim)
+b5.place(x=650,y=90)
+b6=Button(root,text="STOCK ALTO",command= mostrarStockAlto)
+b6.place(x=850,y=90)
+
 
 
 
