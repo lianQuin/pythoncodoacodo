@@ -7,7 +7,6 @@ CONTRASEÑA=1234'''
 
 import gestion
 import os
-import getpass4
 
 
 dirDeTrabajo = os.path.dirname(__file__)
