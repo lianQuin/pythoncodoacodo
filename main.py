@@ -4,7 +4,10 @@ USUARIO=JUAN
 CONTRASEÑA=1234'''
 
 
-
+from tkinter import *
+from tkinter import messagebox
+from tkinter import ttk
+import sqlite3
 import gestion
 import os
 
@@ -390,38 +393,35 @@ while True:
     e1=Entry(root,textvariable=elID)
 
     l2=Label(root,text="Nombre")
-    l2.place(x=50,y=10)
+    l2.place(x=0,y=10)
     e2=Entry(root,textvariable=elNombre,width=50)
     e2.place(x=100,y=10) 
 
 
     l3=Label(root,text="Correo electronico")
-    l3.place(x=50,y=30)
+    l3.place(x=0,y=30)
     e3=Entry(root,textvariable=elCorreo,width=50)
-    e3.place(x=150,y=30)
+    e3.place(x=100,y=30)
 
     l4=Label(root,text="usuario")
-    l4.place(x=50,y=50)
+    l4.place(x=0,y=50)
     e4=Entry(root,textvariable=elUsuario,width=50)
     e4.place(x=100,y=50)
 
     l5=Label(root,text="contraseña")
-    l5.place(x=90,y=70)
+    l5.place(x=0,y=70)
     e5=Entry(root,textvariable=laContraseña,width=50)
-    e5.place(x=150,y=70)
+    e5.place(x=100,y=70)
 
     #botones
-    b1=Button(root,text="crear registro",command=crear)
+    b1=Button(root,text="crear",command=crear)
     b1.place(x=50,y=90)
-    b2=Button(root,text="modificar registro",command=actualizar)
-    b2.place(x=180,y=90)
-    b3=Button(root,text="mostrar lista",command=mostrar)
-    b3.place(x=320,y=90)
-    b4=Button(root,text="eliminar registro", bg="red",command=borrar)
-    b4.place(x=450,y=90)
-
-
-
+    b2=Button(root,text="modificar",command=actualizar)
+    b2.place(x=150,y=90)
+    b3=Button(root,text="mostrar",command=mostrar)
+    b3.place(x=250,y=90)
+    b4=Button(root,text="eliminar", bg="red",command=borrar)
+    b4.place(x=350,y=90)
     root.config(menu=menubar)
  
     #esta siempre esperando, sirve para ver la tabla cuando se indique
