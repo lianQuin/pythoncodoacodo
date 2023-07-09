@@ -75,7 +75,7 @@ def crear():
     laConexion=sqlite3.connect("productos")
     elCursor=laConexion.cursor()
     try:
-        datos= productosNombre.get(), productosCategoria.get(), productosCantidad.get(), productosNacionalidad.get()
+        datos= productosNombre.get().capitalize(), productosCategoria.get().capitalize(), productosCantidad.get(), productosNacionalidad.get().capitalize()
         elCursor.execute("INSERT INTO productos VALUES(NULL,?,?,?,?)",(datos))
         laConexion.commit()
     except:
@@ -95,7 +95,7 @@ def mostrar():
         for row in elCursor:
             tree.insert("",0,text=row[0],values=(row[1],row[2],row[3],row[4]))
     except:
-        pass
+        pass   
     
 #crear tabla
 
@@ -126,7 +126,7 @@ def actualizar():
     laConexion=sqlite3.connect("productos")
     elCursor=laConexion.cursor()
     if messagebox.askyesno(message="¿los datos se modificaran definitivamente, desea continuar?",title="Advertencia" ):
-        datos= productosNombre.get(), productosCategoria.get(), productosCantidad.get(), productosNacionalidad.get()
+        datos= productosNombre.get().capitalize(), productosCategoria.get().capitalize(), productosCantidad.get(), productosNacionalidad.get().capitalize()
         elCursor.execute("UPDATE productos SET Nombre=?, Categoria=?,Cantidad=?, Nacionalidad=? WHERE Codigo="+ productosCodigo.get(),(datos))
         laConexion.commit()
     else:
@@ -173,7 +173,31 @@ def mostrarStockAlto():
     except:
         pass
 
+def mostrarImportados():
+    laConexion=sqlite3.connect("productos")
+    elCursor=laConexion.cursor()
+    registros=tree.get_children()
+    for elemento in registros:
+        tree.delete(elemento)
+    try:
+        elCursor.execute("SELECT * FROM productos WHERE Nacionalidad = 'Importado'")
+        for row in elCursor:
+            tree.insert("",0,text=row[0],values=(row[1],row[2],row[3],row[4]))
+    except:
+        pass
     
+def mostrarNacionales():
+    laConexion=sqlite3.connect("productos")
+    elCursor=laConexion.cursor()
+    registros=tree.get_children()
+    for elemento in registros:
+        tree.delete(elemento)
+    try:
+        elCursor.execute("SELECT * FROM productos WHERE Nacionalidad=='Nacional' ")
+        for row in elCursor:
+            tree.insert("",0,text=row[0],values=(row[1],row[2],row[3],row[4]))
+    except:
+        pass    
          
          
     
@@ -231,8 +255,10 @@ b5=Button(root,text="STOCK LIMITADO",command= mostrarStockLim)
 b5.place(x=650,y=90)
 b6=Button(root,text="STOCK ALTO",command= mostrarStockAlto)
 b6.place(x=850,y=90)
-
-
+b7=Button(root,text="IMPORTADOS",command= mostrarImportados)
+b7.place(x=990,y=90)
+b8=Button(root,text="Nacionales",command= mostrarNacionales)
+b8.place(x=1200,y=90)
 
 
 root.config(menu=menubar)
