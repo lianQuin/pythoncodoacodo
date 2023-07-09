@@ -33,7 +33,7 @@ def conexiondb():
              ''')
         messagebox.showinfo("CONEXION","base de datos creada con exito")
     except:
-        messagebox.showinfo("CONEXION","conexion m exitosa con db")
+        messagebox.showinfo("CONEXION","conexion no exitosa con db")
         
         
 
@@ -91,7 +91,7 @@ def mostrar():
     for elemento in registros:
         tree.delete(elemento)
     try:
-        elCursor.execute("SELECT * FROM productos")
+        elCursor.execute("SELECT * FROM productos ORDER BY Nombre desc")
         for row in elCursor:
             tree.insert("",0,text=row[0],values=(row[1],row[2],row[3],row[4]))
     except:
@@ -155,7 +155,7 @@ def mostrarStockLim():
     for elemento in registros:
         tree.delete(elemento)
     try:
-        elCursor.execute("SELECT * FROM productos WHERE Cantidad <=20")
+        elCursor.execute("SELECT * FROM productos WHERE Cantidad <=20 ORDER BY Nombre desc ")
         for row in elCursor:
             tree.insert("",0,text=row[0],values=(row[1],row[2],row[3],row[4]))
     except:
@@ -167,7 +167,7 @@ def mostrarStockAlto():
     for elemento in registros:
         tree.delete(elemento)
     try:
-        elCursor.execute("SELECT * FROM productos WHERE Cantidad >=100")
+        elCursor.execute("SELECT * FROM productos WHERE Cantidad >=100 ORDER BY Nombre desc")
         for row in elCursor:
             tree.insert("",0,text=row[0],values=(row[1],row[2],row[3],row[4]))
     except:
@@ -180,7 +180,7 @@ def mostrarImportados():
     for elemento in registros:
         tree.delete(elemento)
     try:
-        elCursor.execute("SELECT * FROM productos WHERE Nacionalidad = 'Importado'")
+        elCursor.execute("SELECT * FROM productos WHERE Nacionalidad = 'Importado' ORDER BY Nombre desc")
         for row in elCursor:
             tree.insert("",0,text=row[0],values=(row[1],row[2],row[3],row[4]))
     except:
@@ -193,7 +193,7 @@ def mostrarNacionales():
     for elemento in registros:
         tree.delete(elemento)
     try:
-        elCursor.execute("SELECT * FROM productos WHERE Nacionalidad=='Nacional' ")
+        elCursor.execute("SELECT * FROM productos WHERE Nacionalidad=='Nacional' ORDER BY Nombre desc ")
         for row in elCursor:
             tree.insert("",0,text=row[0],values=(row[1],row[2],row[3],row[4]))
     except:
@@ -221,44 +221,44 @@ menubar.add_cascade(label="ayuda",menu=ayudamenu)
 
 e1=Entry(root,textvariable=productosCodigo)
 
-l2=Label(root,text="Nombre del producto")
-l2.place(x=50,y=10)
+l2=Label(root,text="Nombre")
+l2.place(x=20,y=10)
 e2=Entry(root,textvariable=productosNombre,width=50)
 e2.place(x=100,y=10) 
 
 
-l3=Label(root,text="Categoria del producto")
-l3.place(x=50,y=30)
+l3=Label(root,text="Categoria")
+l3.place(x=20,y=30)
 e3=Entry(root,textvariable=productosCategoria,width=50)
-e3.place(x=150,y=30)
+e3.place(x=100,y=30)
 
-l4=Label(root,text="Cantidad de producto")
-l4.place(x=50,y=50)
+l4=Label(root,text="Cantidad")
+l4.place(x=20,y=50)
 e4=Entry(root,textvariable=productosCantidad,width=50)
 e4.place(x=100,y=50)
 
 l5=Label(root,text="Nacionalidad")
-l5.place(x=90,y=70)
+l5.place(x=20,y=70)
 e5=Entry(root,textvariable=productosNacionalidad,width=50)
-e5.place(x=150,y=70)
+e5.place(x=100,y=70)
 
 #botones
-b1=Button(root,text="crear registro",command=crear)
-b1.place(x=50,y=90)
-b2=Button(root,text="modificar registro",command=actualizar)
-b2.place(x=180,y=90)
-b3=Button(root,text="mostrar lista",command=mostrar)
-b3.place(x=320,y=90)
-b4=Button(root,text="eliminar registro", bg="red",command=borrar)
-b4.place(x=450,y=90)
-b5=Button(root,text="STOCK LIMITADO",command= mostrarStockLim)
-b5.place(x=650,y=90)
-b6=Button(root,text="STOCK ALTO",command= mostrarStockAlto)
-b6.place(x=850,y=90)
-b7=Button(root,text="IMPORTADOS",command= mostrarImportados)
-b7.place(x=990,y=90)
+b1=Button(root,text="Crear",command=crear)
+b1.place(x=50,y=100)
+b2=Button(root,text="Modificar",command=actualizar)
+b2.place(x=150,y=100)
+b3=Button(root,text="Mostrar",command=mostrar)
+b3.place(x=250,y=100)
+b4=Button(root,text="Eliminar", bg="red",command=borrar)
+b4.place(x=350,y=100)
+b5=Button(root,text="Stock bajo",command= mostrarStockLim)
+b5.place(x=450,y=100)
+b6=Button(root,text="Stock alto",command= mostrarStockAlto)
+b6.place(x=550,y=100)
+b7=Button(root,text="Importados",command= mostrarImportados)
+b7.place(x=650,y=100)
 b8=Button(root,text="Nacionales",command= mostrarNacionales)
-b8.place(x=1200,y=90)
+b8.place(x=750,y=100)
 
 
 root.config(menu=menubar)
