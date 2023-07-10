@@ -298,7 +298,7 @@ while True:
         laConexion=sqlite3.connect("usuarios")
         elCursor=laConexion.cursor()
         try:
-            datos=elNombre.get().capitalize(),elCorreo.get(),elUsuario.get().capitalize(),laContraseña.get().new('md5')
+            datos=elNombre.get().capitalize(),elCorreo.get(),elUsuario.get().capitalize(),laContraseña.get()
             elCursor.execute("INSERT INTO usuarios VALUES(NULL,?,?,?,?)",(datos))
             laConexion.commit()
         except:
@@ -309,7 +309,7 @@ while True:
     
     def mostrar():
         laConexion=sqlite3.connect("usuarios")
-        elCursor=laConexion.cursor()
+        elCursor=laConexion.cursor()  
         registros=tree.get_children()
         for elemento in registros:
             tree.delete(elemento)
@@ -411,6 +411,7 @@ while True:
     l5=Label(root,text="contraseña")
     l5.place(x=0,y=70)
     e5=Entry(root,textvariable=laContraseña,width=50)
+  
     e5.place(x=100,y=70)
 
     #botones
