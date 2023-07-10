@@ -10,7 +10,7 @@ from tkinter import ttk
 import sqlite3
 import gestion
 import os
-
+import hashlib
 
 dirDeTrabajo = os.path.dirname(__file__)
 os.chdir(dirDeTrabajo)
@@ -223,6 +223,7 @@ while True:
     from tkinter import messagebox
     from tkinter import ttk
     import sqlite3
+    import hashlib
 
     #desarrollando la interfaz gráfica.
     root=Tk()
@@ -230,7 +231,6 @@ while True:
     root.geometry("600x350")
 
     #las variables de los usuarios
-
     elID=StringVar()
     elNombre=StringVar()
     elCorreo=StringVar()
@@ -298,7 +298,7 @@ while True:
         laConexion=sqlite3.connect("usuarios")
         elCursor=laConexion.cursor()
         try:
-            datos=elNombre.get(),elCorreo.get(),elUsuario.get(),laContraseña.get()
+            datos=elNombre.get().capitalize(),elCorreo.get(),elUsuario.get().capitalize(),laContraseña.get().new('md5')
             elCursor.execute("INSERT INTO usuarios VALUES(NULL,?,?,?,?)",(datos))
             laConexion.commit()
         except:
@@ -349,7 +349,7 @@ while True:
         laConexion=sqlite3.connect("usuarios")
         elCursor=laConexion.cursor()
         try:
-            datos=elNombre.get(),elCorreo.get(),elUsuario.get(),laContraseña.get()
+            datos=elNombre.get().capitalize(),elCorreo.get(),elUsuario.get().capitalize(),laContraseña.get().new('md5')
             elCursor.execute("UPDATE usuarios SET NOMBRE=?,CORREO=?,USUARIO=?,CONTRASEÑA=? WHERE ID="+ elID.get(),(datos))
             laConexion.commit()
         except:
